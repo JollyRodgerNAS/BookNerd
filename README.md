@@ -1,0 +1,1 @@
+This is a WinForms application that will keep track/create librarians, cardholders and books and allow for standard library functions such as checking in/checking out books using MySQL as a database. 
