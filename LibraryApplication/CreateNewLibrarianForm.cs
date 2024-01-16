@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,6 +26,14 @@ namespace LibraryApplication
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void createNewButton_Click(object sender, EventArgs e)
+        {
+            string tableName = "librarian";
+            CRUD oh = new CRUD();
+            oh.Create(tableName);
+ 
         }
     }
 }

@@ -148,6 +148,7 @@
             createNewButton.TabIndex = 12;
             createNewButton.Text = "Create";
             createNewButton.UseVisualStyleBackColor = true;
+            createNewButton.Click += createNewButton_Click;
             // 
             // CreateNewLibrarianForm
             // 

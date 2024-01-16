@@ -32,8 +32,8 @@
             enterLoginInfoLabel = new Label();
             usernameLabel = new Label();
             passwordLabel = new Label();
-            firstNameTextBox = new TextBox();
-            lastNameTextBox = new TextBox();
+            usernameTextBox = new TextBox();
+            passwordTextBox = new TextBox();
             loginButton = new Button();
             createNewLinkLabel = new LinkLabel();
             SuspendLayout();
@@ -55,7 +55,6 @@
             enterLoginInfoLabel.Size = new Size(295, 30);
             enterLoginInfoLabel.TabIndex = 1;
             enterLoginInfoLabel.Text = "Enter your library login info or:";
-            enterLoginInfoLabel.Click += enterLoginInfoLabel_Click;
             // 
             // usernameLabel
             // 
@@ -75,19 +74,19 @@
             passwordLabel.TabIndex = 3;
             passwordLabel.Text = "Enter your password:";
             // 
-            // firstNameTextBox
+            // usernameTextBox
             // 
-            firstNameTextBox.Location = new Point(247, 132);
-            firstNameTextBox.Name = "firstNameTextBox";
-            firstNameTextBox.Size = new Size(106, 35);
-            firstNameTextBox.TabIndex = 5;
+            usernameTextBox.Location = new Point(247, 132);
+            usernameTextBox.Name = "usernameTextBox";
+            usernameTextBox.Size = new Size(106, 35);
+            usernameTextBox.TabIndex = 5;
             // 
-            // lastNameTextBox
+            // passwordTextBox
             // 
-            lastNameTextBox.Location = new Point(247, 176);
-            lastNameTextBox.Name = "lastNameTextBox";
-            lastNameTextBox.Size = new Size(106, 35);
-            lastNameTextBox.TabIndex = 6;
+            passwordTextBox.Location = new Point(247, 176);
+            passwordTextBox.Name = "passwordTextBox";
+            passwordTextBox.Size = new Size(106, 35);
+            passwordTextBox.TabIndex = 6;
             // 
             // loginButton
             // 
@@ -108,6 +107,7 @@
             createNewLinkLabel.TabIndex = 9;
             createNewLinkLabel.TabStop = true;
             createNewLinkLabel.Text = "create new";
+            createNewLinkLabel.LinkClicked += createNewLinkLabel_LinkClicked;
             // 
             // WelcomeForm
             // 
@@ -117,8 +117,8 @@
             ClientSize = new Size(726, 386);
             Controls.Add(createNewLinkLabel);
             Controls.Add(loginButton);
-            Controls.Add(lastNameTextBox);
-            Controls.Add(firstNameTextBox);
+            Controls.Add(passwordTextBox);
+            Controls.Add(usernameTextBox);
             Controls.Add(passwordLabel);
             Controls.Add(usernameLabel);
             Controls.Add(enterLoginInfoLabel);
@@ -137,8 +137,8 @@
         private Label enterLoginInfoLabel;
         private Label usernameLabel;
         private Label passwordLabel;
-        private TextBox firstNameTextBox;
-        private TextBox lastNameTextBox;
+        private TextBox usernameTextBox;
+        private TextBox passwordTextBox;
         private Button loginButton;
         private LinkLabel createNewLinkLabel;
     }
