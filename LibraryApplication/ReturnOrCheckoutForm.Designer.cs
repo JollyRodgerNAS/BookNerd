@@ -50,6 +50,7 @@
             checkoutChoiceButton.TabIndex = 1;
             checkoutChoiceButton.Text = "Checkout";
             checkoutChoiceButton.UseVisualStyleBackColor = true;
+            checkoutChoiceButton.Click += checkoutChoiceButton_Click;
             // 
             // returnChoiceButton
             // 

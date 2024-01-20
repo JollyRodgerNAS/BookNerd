@@ -21,34 +21,35 @@ namespace LibraryApplication
             SslMode = MySqlSslMode.Disabled
         };
 
-        public void Create(string tableName)
+        public async void Create(string tableName, List<string> textBoxValues)
         {
+
             string connectionString = str.ConnectionString;
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             if (tableName == "librarian")
             {
-                List<string> list = new List<string>();
-
-                foreach (Control control in Controls)
+                if (textBoxValues.Count > 0)
                 {
-                    if (control is TextBox textbox)
-                    {
-                        string data = textbox.Text;
-                        list.Add(data.ToString());
-                    }
+                    MessageBox.Show(textBoxValues[0]);
                 }
-                MessageBox.Show(list[0], list[1]);
-                string query = $"insert into librarian (firstName, lastName, userName, password, email, phoneNumber) values (@firstName, @lastName, @userName, @password, @email, @phoneNumber);";
+                else
+                {
+                    MessageBox.Show("No data entered");
+                }
+
+
+                string query = "insert into librarian (firstName, lastName, email, phoneNumber, userName, password) values (@firstName, @lastName, @email, @phoneNumber, @userName, @password);";
+
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@firstName", list[0]);
-                    command.Parameters.AddWithValue("@lastName", list[1]);
-                    command.Parameters.AddWithValue("@userName", list[2]);
-                    command.Parameters.AddWithValue("@password", list[3]);
-                    command.Parameters.AddWithValue("@email", list[4]);
-                    command.Parameters.AddWithValue("@phoneNumber", list[5]);
+                    command.Parameters.AddWithValue("@firstName", textBoxValues[0]);
+                    command.Parameters.AddWithValue("@lastName", textBoxValues[1]);
+                    command.Parameters.AddWithValue("@email", textBoxValues[2]);
+                    command.Parameters.AddWithValue("@phoneNumber", textBoxValues[3]);
+                    command.Parameters.AddWithValue("@userName", textBoxValues[4]);
+                    command.Parameters.AddWithValue("@password", textBoxValues[5]);
 
                     int rowsAffected = command.ExecuteNonQuery();
 
@@ -65,31 +66,67 @@ namespace LibraryApplication
             }
             else if (tableName == "book")
             {
-                List<string> list = new List<string>();
-
-                foreach (Control control in Controls)
+                if (textBoxValues.Count > 0)
                 {
-                    if (control is TextBox textbox)
+                    MessageBox.Show(textBoxValues[0]);
+                }
+                else
+                {
+                    MessageBox.Show("No data entered");
+                }
+
+                string query = "insert into book (title, author, isCheckedOut) values (@title, @author, @isCheckedOut);";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@title", textBoxValues[0]);
+                    command.Parameters.AddWithValue("@author", textBoxValues[1]);
+                    command.Parameters.AddWithValue("@isCheckedOut", false);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
                     {
-                        string data = textbox.Text;
-                        list.Add(data);
+                        MessageBox.Show("Success");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Fail");
                     }
                 }
+
+
 
             }
             else if (tableName == "cardholder")
             {
-                List<string> list = new List<string>();
-
-                foreach (Control control in Controls)
+                if (textBoxValues.Count > 0)
                 {
-                    if (control is TextBox textbox)
-                    {
-                        string data = textbox.Text;
-                        list.Add(data);
-                    }
+                    MessageBox.Show(textBoxValues[0]);
+                }
+                else
+                {
+                    MessageBox.Show("No data entered");
                 }
 
+                string query = "insert into cardholder (firstName, lastName) values (@firstName, @lastName);";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@firstName", textBoxValues[0]);
+                    command.Parameters.AddWithValue("@lastName", textBoxValues[1]);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Success");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Fail");
+                    }
+                }
             }
             else
             {

@@ -17,9 +17,30 @@ namespace LibraryApplication
             InitializeComponent();
         }
 
-        private void chooseBookLabel_Click(object sender, EventArgs e)
+        private void createBookButton_Click(object sender, EventArgs e)
         {
+            List<string> textBoxValues = new List<string>
+            {
+                bookNameTextBox.Text,
+                authorNameTextBox.Text,
+            };
 
+            string tableName = "book";
+            CRUD oh = new CRUD();
+            oh.Create(tableName, textBoxValues);
+        }
+
+        private void createCardholerButton_Click(object sender, EventArgs e)
+        {
+            List<string> textBoxValues = new List<string>
+            {
+                firstNameTextBox.Text,
+                lastNameTextBox.Text,
+            };
+
+            string tableName = "cardholder";
+            CRUD oh = new CRUD();
+            oh.Create(tableName, textBoxValues);
         }
     }
 }

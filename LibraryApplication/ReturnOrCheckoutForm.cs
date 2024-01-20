@@ -16,5 +16,12 @@ namespace LibraryApplication
         {
             InitializeComponent();
         }
+
+        private void checkoutChoiceButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            BookCheckoutForm frm = new BookCheckoutForm();
+            frm.ShowDialog();
+        }
     }
 }

@@ -66,7 +66,6 @@
             chooseBookLabel.Size = new Size(379, 30);
             chooseBookLabel.TabIndex = 1;
             chooseBookLabel.Text = "Choose book that is being checked out:";
-            chooseBookLabel.Click += chooseBookLabel_Click;
             // 
             // cardholderComboBox
             // 
@@ -106,6 +105,7 @@
             createCardholerButton.TabIndex = 4;
             createCardholerButton.Text = "Create";
             createCardholerButton.UseVisualStyleBackColor = true;
+            createCardholerButton.Click += createCardholerButton_Click;
             // 
             // lastNameTextBox
             // 
@@ -161,6 +161,7 @@
             createBookButton.TabIndex = 4;
             createBookButton.Text = "Create";
             createBookButton.UseVisualStyleBackColor = true;
+            createBookButton.Click += createBookButton_Click;
             // 
             // authorNameTextBox
             // 

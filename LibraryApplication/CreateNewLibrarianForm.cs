@@ -30,9 +30,19 @@ namespace LibraryApplication
 
         private void createNewButton_Click(object sender, EventArgs e)
         {
+            List<string> textBoxValues = new List<string>
+            {
+                firstNameTextBox.Text,
+                lastNameTextBox.Text,
+                emailTextBox.Text,
+                phoneNumberTextBox.Text,
+                usernameTextBox.Text,
+                passwordTextBox.Text
+            };
+
             string tableName = "librarian";
             CRUD oh = new CRUD();
-            oh.Create(tableName);
+            oh.Create(tableName, textBoxValues);
  
         }
     }
