@@ -31,6 +31,7 @@
             optionLabel = new Label();
             checkoutChoiceButton = new Button();
             returnChoiceButton = new Button();
+            bookViewerButton = new Button();
             SuspendLayout();
             // 
             // optionLabel
@@ -60,6 +61,17 @@
             returnChoiceButton.TabIndex = 2;
             returnChoiceButton.Text = "Return";
             returnChoiceButton.UseVisualStyleBackColor = true;
+            returnChoiceButton.Click += returnChoiceButton_Click;
+            // 
+            // bookViewerButton
+            // 
+            bookViewerButton.Location = new Point(169, 242);
+            bookViewerButton.Name = "bookViewerButton";
+            bookViewerButton.Size = new Size(237, 69);
+            bookViewerButton.TabIndex = 3;
+            bookViewerButton.Text = "View";
+            bookViewerButton.UseVisualStyleBackColor = true;
+            bookViewerButton.Click += bookViewerButton_Click;
             // 
             // ReturnOrCheckoutForm
             // 
@@ -67,6 +79,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(608, 343);
+            Controls.Add(bookViewerButton);
             Controls.Add(returnChoiceButton);
             Controls.Add(checkoutChoiceButton);
             Controls.Add(optionLabel);
@@ -83,5 +96,6 @@
         private Label optionLabel;
         private Button checkoutChoiceButton;
         private Button returnChoiceButton;
+        private Button bookViewerButton;
     }
 }

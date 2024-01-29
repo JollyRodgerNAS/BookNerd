@@ -72,13 +72,14 @@
             viewButton.TabIndex = 3;
             viewButton.Text = "View";
             viewButton.UseVisualStyleBackColor = true;
+            viewButton.Click += viewButton_Click;
             // 
             // BookViewerForm
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(789, 474);
+            ClientSize = new Size(802, 474);
             Controls.Add(viewButton);
             Controls.Add(bookListBox);
             Controls.Add(cardholderListBox);

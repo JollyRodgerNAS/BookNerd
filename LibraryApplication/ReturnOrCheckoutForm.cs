@@ -23,5 +23,19 @@ namespace LibraryApplication
             BookCheckoutForm frm = new BookCheckoutForm();
             frm.ShowDialog();
         }
+
+        private void bookViewerButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            BookViewerForm frm = new BookViewerForm();
+            frm.ShowDialog();
+        }
+
+        private void returnChoiceButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            BookReturnForm frm = new BookReturnForm();
+            frm.ShowDialog();
+        }
     }
 }

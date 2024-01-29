@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 
 namespace LibraryApplication
 {
@@ -134,6 +135,121 @@ namespace LibraryApplication
             }
             connection.Close();
 
+        }
+
+        public string Read(string tableName, string firstName, string lastName)
+        {
+            string connectionString = str.ConnectionString;
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            List<string> searchResults = [];
+            
+
+            if (tableName == "librarian")
+            {
+                string query = "";
+                return null;
+            }
+            else if (tableName == "book")
+            {
+                string query = "select title from book";
+                return null;
+            }
+            else if (tableName == "cardholder")
+            {
+                string query = "select book.title " +
+                               "from checkouts " +
+                               "inner join book on checkouts.bookId = book.id " +
+                               "inner join cardholder on checkouts.cardholderId = cardholder.id " +
+                               "where cardholder.firstName = @firstName AND cardholder.lastName = @lastName";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    
+                    command.Parameters.AddWithValue("@firstName", firstName);
+                    command.Parameters.AddWithValue("@lastName", lastName);
+
+                    
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        
+                        if (reader.HasRows)
+                        {
+                            
+                            MessageBox.Show($"Books checked out to {firstName} {lastName}:");
+                            while (reader.Read())
+                            {
+                                
+                                string bookTitle = reader.GetString("title");
+                                searchResults.Add(bookTitle);
+
+                                
+                            }
+                        }
+                        else
+                        {
+                            
+                        }
+                    }
+                }
+                string formattedResults = string.Join(", ", searchResults);
+                return formattedResults;
+            }
+            else if (tableName == "checkouts")
+            {
+                string query = "select";
+                return null;
+            }
+            else
+            {
+                MessageBox.Show("No tablename matches");
+                return null;
+            }
+            connection.Close();
+            
+        }
+
+        public void Update(string tableName, string book, string cardholder)
+        {
+            string connectionString = str.ConnectionString;
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            string searchResults;
+
+            if (tableName == "librarian")
+            {
+
+            }
+            else if (tableName == "book")
+            {
+
+            }
+            else if (tableName == "cardholder")
+            {
+                string query = "";
+            }
+            connection.Close();
+        }
+
+        public void Delete(string tableName, string record)
+        {
+            string connectionString = str.ConnectionString;
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            if (tableName == "librarian")
+            {
+
+            }
+            else if (tableName == "book")
+            {
+
+            }
+            else if (tableName == "cardholder")
+            {
+                string query = "";
+            }
+            connection.Close();
         }
     }
 }
