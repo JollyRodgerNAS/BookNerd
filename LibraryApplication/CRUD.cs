@@ -148,11 +148,13 @@ namespace LibraryApplication
             if (tableName == "librarian")
             {
                 string query = "";
+                connection.Close();
                 return null;
             }
             else if (tableName == "book")
             {
                 string query = "select title from book";
+                connection.Close();
                 return null;
             }
             else if (tableName == "cardholder")
@@ -161,7 +163,7 @@ namespace LibraryApplication
                                "from checkouts " +
                                "inner join book on checkouts.bookId = book.id " +
                                "inner join cardholder on checkouts.cardholderId = cardholder.id " +
-                               "where cardholder.firstName = @firstName AND cardholder.lastName = @lastName";
+                               "where cardholder.firstName = @firstName and cardholder.lastName = @lastName";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -175,38 +177,35 @@ namespace LibraryApplication
                         
                         if (reader.HasRows)
                         {
-                            
                             MessageBox.Show($"Books checked out to {firstName} {lastName}:");
                             while (reader.Read())
                             {
-                                
                                 string bookTitle = reader.GetString("title");
                                 searchResults.Add(bookTitle);
-
-                                
                             }
                         }
                         else
                         {
-                            
+                            MessageBox.Show("No books checked out");
                         }
                     }
                 }
                 string formattedResults = string.Join(", ", searchResults);
+                connection.Close();
                 return formattedResults;
             }
             else if (tableName == "checkouts")
             {
                 string query = "select";
+                connection.Close();
                 return null;
             }
             else
             {
                 MessageBox.Show("No tablename matches");
+                connection.Close();
                 return null;
             }
-            connection.Close();
-            
         }
 
         public void Update(string tableName, string book, string cardholder)
@@ -222,16 +221,37 @@ namespace LibraryApplication
             }
             else if (tableName == "book")
             {
+              string updateQuery = "update book set isCheckedOut = 0 where title = @book";
 
+               using (MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection))
+               {
+                    updateCommand.Parameters.AddWithValue("@book", book);
+
+                    int updateRowsAffected = updateCommand.ExecuteNonQuery();
+
+                    if (updateRowsAffected > 0)
+                    {
+                        MessageBox.Show("Book status updated successfully.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error updating book status.");
+                    }
+                }
+                
             }
             else if (tableName == "cardholder")
             {
                 string query = "";
             }
+            else
+            {
+                MessageBox.Show("No tablename matches");
+            }
             connection.Close();
         }
 
-        public void Delete(string tableName, string record)
+        public void Delete(string tableName, string book)
         {
             string connectionString = str.ConnectionString;
             MySqlConnection connection = new MySqlConnection(connectionString);
@@ -243,11 +263,31 @@ namespace LibraryApplication
             }
             else if (tableName == "book")
             {
+                string deleteQuery = "delete from checkouts where bookId = (select id from book where title = @book)";
 
+                using (MySqlCommand deleteCommand = new MySqlCommand(deleteQuery, connection))
+                {
+                    deleteCommand.Parameters.AddWithValue("@book", book);
+
+                    int rowsAffected = deleteCommand.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Book returned successfully.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error returning book");
+                    }
+                }
             }
             else if (tableName == "cardholder")
             {
                 string query = "";
+            }
+            else
+            {
+                MessageBox.Show("No tablename matches");
             }
             connection.Close();
         }

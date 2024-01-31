@@ -37,6 +37,10 @@ namespace LibraryApplication
 
         private void createBookButton_Click(object sender, EventArgs e)
         {
+            string connectionString = str.ConnectionString;
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
             List<string> textBoxValues = new List<string>
             {
                 bookNameTextBox.Text,
@@ -45,11 +49,38 @@ namespace LibraryApplication
 
             string tableName = "book";
             CRUD oh = new CRUD();
-            oh.Create(tableName, textBoxValues);
+
+            string query = "select title, author from book where title = @title and author = @author;";
+
+            using (MySqlCommand command = new MySqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("title", textBoxValues[0]);
+                command.Parameters.AddWithValue("author", textBoxValues[1]);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        MessageBox.Show("Book already exists!");
+                    }
+
+                    else
+                    {
+                        oh.Create(tableName, textBoxValues);
+                    }
+                }
+
+            }
+            connection.Close();
+            //oh.Create(tableName, textBoxValues);
         }
 
         private void createCardholerButton_Click(object sender, EventArgs e)
         {
+            string connectionString = str.ConnectionString;
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
             List<string> textBoxValues = new List<string>
             {
                 firstNameTextBox.Text,
@@ -58,7 +89,29 @@ namespace LibraryApplication
 
             string tableName = "cardholder";
             CRUD oh = new CRUD();
-            oh.Create(tableName, textBoxValues);
+
+            string query = "select firstName, lastName from cardholder where " +
+                "firstName = @firstName and lastName = @lastName;";
+
+            using (MySqlCommand command = new MySqlCommand (query, connection))
+            {
+                command.Parameters.AddWithValue("@firstName", textBoxValues[0]);
+                command.Parameters.AddWithValue("@lastName", textBoxValues[1]);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        MessageBox.Show("Cardholder already exists!");
+                    }
+                    else
+                    {
+                        oh.Create(tableName, textBoxValues);
+                    }
+                }
+            }
+            connection.Close();
+            //oh.Create(tableName, textBoxValues);
         }
 
         public void AddCardholderText()
@@ -151,7 +204,8 @@ namespace LibraryApplication
 
 
             string query = "insert into checkouts (cardholderId, bookId) " +
-                                   "values ((select id from cardholder where firstName = @cardholderFirstName and lastName = @cardholderLastName), " +
+                                   "values ((select id from cardholder where " +
+                                   "firstName = @cardholderFirstName and lastName = @cardholderLastName), " +
                                    "(select id from book where title = @bookTitle))";
 
             using (MySqlCommand checkoutCommand = new MySqlCommand(query, connection))
@@ -190,13 +244,14 @@ namespace LibraryApplication
                     MessageBox.Show("Error checking out the book.");
                 }
             }
+            connection.Close();
         }
 
         private void checkoutButton_Click(object sender, EventArgs e)
         {
+
             string selectedCardholder = cardholderComboBox.SelectedItem.ToString();
             string selectedBook = bookComboBox.SelectedItem.ToString();
-
             
             CheckoutBook(selectedCardholder, selectedBook);
         }

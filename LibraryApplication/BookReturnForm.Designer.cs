@@ -58,6 +58,7 @@
             returnButton.TabIndex = 2;
             returnButton.Text = "Return";
             returnButton.UseVisualStyleBackColor = true;
+            returnButton.Click += returnButton_Click;
             // 
             // BookReturnForm
             // 
