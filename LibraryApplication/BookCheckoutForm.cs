@@ -63,16 +63,13 @@ namespace LibraryApplication
                     {
                         MessageBox.Show("Book already exists!");
                     }
-
                     else
                     {
                         oh.Create(tableName, textBoxValues);
                     }
                 }
-
             }
             connection.Close();
-            //oh.Create(tableName, textBoxValues);
         }
 
         private void createCardholerButton_Click(object sender, EventArgs e)
@@ -111,7 +108,6 @@ namespace LibraryApplication
                 }
             }
             connection.Close();
-            //oh.Create(tableName, textBoxValues);
         }
 
         public void AddCardholderText()
@@ -123,13 +119,10 @@ namespace LibraryApplication
             string query = "select * from cardholder";
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
-
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
-
                     if (reader.HasRows)
                     {
-
                         while (reader.Read())
                         {
                             string data = reader.GetString(1);
@@ -138,10 +131,7 @@ namespace LibraryApplication
                             cardholderComboBox.Invoke((MethodInvoker)delegate
                             {
                                 cardholderComboBox.Items.Add(result);
-                                //cardholderListBox.Items.Add(dataDouble);
                             });
-
-                            //cardholderListBox.Items.Add(data);
                         }
                     }
                     else
@@ -159,36 +149,29 @@ namespace LibraryApplication
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            string query = "select * from book";
+            string query = "select * from book where isCheckedOut = 0;";
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
-
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
-
                     if (reader.HasRows)
                     {
-
                         while (reader.Read())
                         {
                             string data = reader.GetString(1);
-                            //string dataDouble = reader.GetString(2);
-                            //string result = data + " " + dataDouble;
                             bookComboBox.Invoke((MethodInvoker)delegate
                             {
                                 bookComboBox.Items.Add(data);
-                                //cardholderListBox.Items.Add(dataDouble);
                             });
-
-                            //cardholderListBox.Items.Add(data);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("No records found.");
+
                     }
                 }
             }
+
             connection.Close();
         }
 
@@ -249,10 +232,16 @@ namespace LibraryApplication
 
         private void checkoutButton_Click(object sender, EventArgs e)
         {
+            string connectionString = str.ConnectionString;
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
 
             string selectedCardholder = cardholderComboBox.SelectedItem.ToString();
             string selectedBook = bookComboBox.SelectedItem.ToString();
-            
+
+            bookComboBox.Items.Remove(selectedBook);
+            bookComboBox.ResetText();
+
             CheckoutBook(selectedCardholder, selectedBook);
         }
     }

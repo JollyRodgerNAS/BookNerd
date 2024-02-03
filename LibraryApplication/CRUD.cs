@@ -159,7 +159,7 @@ namespace LibraryApplication
             }
             else if (tableName == "cardholder")
             {
-                string query = "select book.title " +
+                /*string query = "select book.title " +
                                "from checkouts " +
                                "inner join book on checkouts.bookId = book.id " +
                                "inner join cardholder on checkouts.cardholderId = cardholder.id " +
@@ -167,14 +167,11 @@ namespace LibraryApplication
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    
                     command.Parameters.AddWithValue("@firstName", firstName);
                     command.Parameters.AddWithValue("@lastName", lastName);
 
-                    
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        
                         if (reader.HasRows)
                         {
                             MessageBox.Show($"Books checked out to {firstName} {lastName}:");
@@ -190,9 +187,13 @@ namespace LibraryApplication
                         }
                     }
                 }
-                string formattedResults = string.Join(", ", searchResults);
+                //string formattedResults = string.Join(", ", searchResults);
+                for (int i = 0; i < searchResults.Count; i++)
+                {
+                    return searchResults[i];
+                }*/
                 connection.Close();
-                return formattedResults;
+                return null;
             }
             else if (tableName == "checkouts")
             {

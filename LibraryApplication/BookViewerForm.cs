@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.DirectoryServices;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -42,13 +43,10 @@ namespace LibraryApplication
             string query = "select * from cardholder";
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
-
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
-
                     if (reader.HasRows)
                     {
-
                         while (reader.Read())
                         {
                             string data = reader.GetString(1);
@@ -57,10 +55,7 @@ namespace LibraryApplication
                             cardholderListBox.Invoke((MethodInvoker)delegate
                             {
                                 cardholderListBox.Items.Add(result);
-                                //cardholderListBox.Items.Add(dataDouble);
                             });
-
-                            //cardholderListBox.Items.Add(data);
                         }
                     }
                     else
@@ -73,6 +68,12 @@ namespace LibraryApplication
 
         private void viewButton_Click(object sender, EventArgs e)
         {
+            string connectionString = str.ConnectionString;
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            List<string> searchResults = [];
+
+            bookListBox.Items.Clear();
             if (cardholderListBox.SelectedItem != null)
             {
                 string selectedName = cardholderListBox.SelectedItem.ToString();
@@ -84,11 +85,38 @@ namespace LibraryApplication
                     string firstName = nameParts[0];
                     string lastName = nameParts[1];
 
-                    string tableName = "cardholder";
-                    CRUD oh = new CRUD();
-                    //oh.Read(tableName, firstName, lastName);
-                    bookListBox.Items.Add(oh.Read(tableName,firstName,lastName));
+                    string query = "select book.title " +
+                               "from checkouts " +
+                               "inner join book on checkouts.bookId = book.id " +
+                               "inner join cardholder on checkouts.cardholderId = cardholder.id " +
+                               "where cardholder.firstName = @firstName and cardholder.lastName = @lastName";
 
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@firstName", firstName);
+                        command.Parameters.AddWithValue("@lastName", lastName);
+
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                MessageBox.Show($"Books checked out to {firstName} {lastName}:");
+                                while (reader.Read())
+                                {
+                                    string bookTitle = reader.GetString("title");
+                                    searchResults.Add(bookTitle);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("No books checked out");
+                            }
+                        }
+                    }
+                    for (int i = 0; i < searchResults.Count; i++)
+                    {
+                         bookListBox.Items.Add(searchResults[i]);
+                    }
                 }
                 else
                 {

@@ -57,12 +57,12 @@ namespace LibraryApplication
                     }
                 }
             }
-            string formattedResults = string.Join(", ", search);
-            /*selectBookComboBox.Invoke((MethodInvoker)delegate
+            
+            for (int i = 0; i < search.Count; i++)
             {
-                
-            });*/
-            selectBookComboBox.Items.Add(formattedResults);
+                selectBookComboBox.Items.Add(search[i]);
+            }
+            
         }
 
         private void returnButton_Click(object sender, EventArgs e)
@@ -72,7 +72,9 @@ namespace LibraryApplication
             CRUD oh = new CRUD();
             oh.Delete(tablename, book);
             oh.Update(tablename, book, "");
+            
             selectBookComboBox.Items.Remove(selectBookComboBox.SelectedItem);
+            selectBookComboBox.ResetText();
         }
     }
 }
