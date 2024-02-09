@@ -32,6 +32,7 @@
             cardholderListBox = new ListBox();
             bookListBox = new ListBox();
             viewButton = new Button();
+            returnToMainMenuButton = new Button();
             SuspendLayout();
             // 
             // headerLabel
@@ -74,12 +75,23 @@
             viewButton.UseVisualStyleBackColor = true;
             viewButton.Click += viewButton_Click;
             // 
+            // returnToMainMenuButton
+            // 
+            returnToMainMenuButton.Location = new Point(12, 406);
+            returnToMainMenuButton.Name = "returnToMainMenuButton";
+            returnToMainMenuButton.Size = new Size(256, 56);
+            returnToMainMenuButton.TabIndex = 8;
+            returnToMainMenuButton.Text = "Return to Main Menu";
+            returnToMainMenuButton.UseVisualStyleBackColor = true;
+            returnToMainMenuButton.Click += returnToMainMenuButton_Click;
+            // 
             // BookViewerForm
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(802, 474);
+            Controls.Add(returnToMainMenuButton);
             Controls.Add(viewButton);
             Controls.Add(bookListBox);
             Controls.Add(cardholderListBox);
@@ -87,6 +99,7 @@
             Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(5, 6, 5, 6);
             Name = "BookViewerForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Book Viewer";
             ResumeLayout(false);
             PerformLayout();
@@ -98,5 +111,6 @@
         private ListBox cardholderListBox;
         private ListBox bookListBox;
         private Button viewButton;
+        private Button returnToMainMenuButton;
     }
 }

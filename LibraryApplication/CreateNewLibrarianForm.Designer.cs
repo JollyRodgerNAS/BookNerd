@@ -41,6 +41,7 @@
             usernameTextBox = new TextBox();
             passwordTextBox = new TextBox();
             createNewButton = new Button();
+            returnToMainMenuButton = new Button();
             SuspendLayout();
             // 
             // firstNameLabel
@@ -142,7 +143,7 @@
             // 
             // createNewButton
             // 
-            createNewButton.Location = new Point(262, 348);
+            createNewButton.Location = new Point(272, 347);
             createNewButton.Name = "createNewButton";
             createNewButton.Size = new Size(107, 51);
             createNewButton.TabIndex = 12;
@@ -150,12 +151,23 @@
             createNewButton.UseVisualStyleBackColor = true;
             createNewButton.Click += createNewButton_Click;
             // 
+            // returnToMainMenuButton
+            // 
+            returnToMainMenuButton.Location = new Point(6, 386);
+            returnToMainMenuButton.Name = "returnToMainMenuButton";
+            returnToMainMenuButton.Size = new Size(256, 56);
+            returnToMainMenuButton.TabIndex = 13;
+            returnToMainMenuButton.Text = "Return to Main Menu";
+            returnToMainMenuButton.UseVisualStyleBackColor = true;
+            returnToMainMenuButton.Click += returnToMainMenuButton_Click;
+            // 
             // CreateNewLibrarianForm
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(645, 454);
+            Controls.Add(returnToMainMenuButton);
             Controls.Add(createNewButton);
             Controls.Add(passwordTextBox);
             Controls.Add(usernameTextBox);
@@ -172,6 +184,7 @@
             Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(5, 6, 5, 6);
             Name = "CreateNewLibrarianForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Create New Librarian";
             Load += CreateNewLibrarianForm_Load;
             ResumeLayout(false);
@@ -193,5 +206,6 @@
         private TextBox usernameTextBox;
         private TextBox passwordTextBox;
         private Button createNewButton;
+        private Button returnToMainMenuButton;
     }
 }

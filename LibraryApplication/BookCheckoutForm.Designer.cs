@@ -45,6 +45,7 @@
             authorNameLabel = new Label();
             bookNameLabel = new Label();
             checkoutButton = new Button();
+            returnToMainMenuButton = new Button();
             createNewCardholderGroupBox.SuspendLayout();
             createNewBookGroupBox.SuspendLayout();
             SuspendLayout();
@@ -205,12 +206,23 @@
             checkoutButton.UseVisualStyleBackColor = true;
             checkoutButton.Click += checkoutButton_Click;
             // 
+            // returnToMainMenuButton
+            // 
+            returnToMainMenuButton.Location = new Point(20, 430);
+            returnToMainMenuButton.Name = "returnToMainMenuButton";
+            returnToMainMenuButton.Size = new Size(256, 56);
+            returnToMainMenuButton.TabIndex = 7;
+            returnToMainMenuButton.Text = "Return to Main Menu";
+            returnToMainMenuButton.UseVisualStyleBackColor = true;
+            returnToMainMenuButton.Click += returnToMainMenuButton_Click;
+            // 
             // BookCheckoutForm
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(655, 541);
+            Controls.Add(returnToMainMenuButton);
             Controls.Add(checkoutButton);
             Controls.Add(createNewBookGroupBox);
             Controls.Add(createNewCardholderGroupBox);
@@ -221,6 +233,7 @@
             Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(5, 6, 5, 6);
             Name = "BookCheckoutForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Checkout Book";
             createNewCardholderGroupBox.ResumeLayout(false);
             createNewCardholderGroupBox.PerformLayout();
@@ -249,5 +262,6 @@
         private Button createBookButton;
         private TextBox authorNameTextBox;
         private TextBox bookNameTextBox;
+        private Button returnToMainMenuButton;
     }
 }

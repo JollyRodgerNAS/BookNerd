@@ -16,6 +16,7 @@ namespace LibraryApplication
         public WelcomeForm()
         {
             InitializeComponent();
+            this.FormClosing += ExitApplication;
 
         }
 
@@ -73,6 +74,14 @@ namespace LibraryApplication
             this.Hide();
             CreateNewLibrarianForm frm = new CreateNewLibrarianForm();
             frm.ShowDialog();
+        }
+
+        private void ExitApplication(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
+            }
         }
     }
 }

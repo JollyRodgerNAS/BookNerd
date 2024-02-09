@@ -127,6 +127,7 @@
             Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(5, 6, 5, 6);
             Name = "WelcomeForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Welcome";
             ResumeLayout(false);
             PerformLayout();

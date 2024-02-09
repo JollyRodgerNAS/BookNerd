@@ -31,6 +31,7 @@
             selectBookLabel = new Label();
             selectBookComboBox = new ComboBox();
             returnButton = new Button();
+            returnToMainMenuButton = new Button();
             SuspendLayout();
             // 
             // selectBookLabel
@@ -60,18 +61,30 @@
             returnButton.UseVisualStyleBackColor = true;
             returnButton.Click += returnButton_Click;
             // 
+            // returnToMainMenuButton
+            // 
+            returnToMainMenuButton.Location = new Point(24, 210);
+            returnToMainMenuButton.Name = "returnToMainMenuButton";
+            returnToMainMenuButton.Size = new Size(256, 56);
+            returnToMainMenuButton.TabIndex = 8;
+            returnToMainMenuButton.Text = "Return to Main Menu";
+            returnToMainMenuButton.UseVisualStyleBackColor = true;
+            returnToMainMenuButton.Click += returnToMainMenuButton_Click;
+            // 
             // BookReturnForm
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(553, 278);
+            Controls.Add(returnToMainMenuButton);
             Controls.Add(returnButton);
             Controls.Add(selectBookComboBox);
             Controls.Add(selectBookLabel);
             Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(5, 6, 5, 6);
             Name = "BookReturnForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Return Book";
             ResumeLayout(false);
             PerformLayout();
@@ -82,5 +95,6 @@
         private Label selectBookLabel;
         private ComboBox selectBookComboBox;
         private Button returnButton;
+        private Button returnToMainMenuButton;
     }
 }

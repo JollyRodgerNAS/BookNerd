@@ -15,6 +15,7 @@ namespace LibraryApplication
         public ReturnOrCheckoutForm()
         {
             InitializeComponent();
+            this.FormClosing += ExitApplication;
         }
 
         private void checkoutChoiceButton_Click(object sender, EventArgs e)
@@ -36,6 +37,13 @@ namespace LibraryApplication
             this.Hide();
             BookReturnForm frm = new BookReturnForm();
             frm.ShowDialog();
+        }
+        private void ExitApplication(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
+            }
         }
     }
 }

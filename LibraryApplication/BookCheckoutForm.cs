@@ -33,6 +33,7 @@ namespace LibraryApplication
         {
             InitializeComponent();
             Load += FormLoad;
+            this.FormClosing += ExitApplication;
         }
 
         private void createBookButton_Click(object sender, EventArgs e)
@@ -90,7 +91,7 @@ namespace LibraryApplication
             string query = "select firstName, lastName from cardholder where " +
                 "firstName = @firstName and lastName = @lastName;";
 
-            using (MySqlCommand command = new MySqlCommand (query, connection))
+            using (MySqlCommand command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@firstName", textBoxValues[0]);
                 command.Parameters.AddWithValue("@lastName", textBoxValues[1]);
@@ -203,7 +204,7 @@ namespace LibraryApplication
                 {
                     MessageBox.Show("Book checked out successfully.");
 
-                    
+
                     string updateQuery = "update book set isCheckedOut = true where title = @bookTitle";
 
                     using (MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection))
@@ -243,6 +244,20 @@ namespace LibraryApplication
             bookComboBox.ResetText();
 
             CheckoutBook(selectedCardholder, selectedBook);
+        }
+
+        private void returnToMainMenuButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ReturnOrCheckoutForm frm = new ReturnOrCheckoutForm();
+            frm.ShowDialog();
+        }
+        private void ExitApplication(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
+            }
         }
     }
 }

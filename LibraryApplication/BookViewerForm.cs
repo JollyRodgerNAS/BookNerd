@@ -32,6 +32,7 @@ namespace LibraryApplication
         {
             InitializeComponent();
             Load += FormLoad;
+            this.FormClosing += ExitApplication;
         }
 
         public void AddText()
@@ -115,7 +116,7 @@ namespace LibraryApplication
                     }
                     for (int i = 0; i < searchResults.Count; i++)
                     {
-                         bookListBox.Items.Add(searchResults[i]);
+                        bookListBox.Items.Add(searchResults[i]);
                     }
                 }
                 else
@@ -126,6 +127,20 @@ namespace LibraryApplication
             else
             {
                 MessageBox.Show("No item selected");
+            }
+        }
+
+        private void returnToMainMenuButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ReturnOrCheckoutForm frm = new ReturnOrCheckoutForm();
+            frm.ShowDialog();
+        }
+        private void ExitApplication(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
             }
         }
     }

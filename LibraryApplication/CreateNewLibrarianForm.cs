@@ -25,6 +25,7 @@ namespace LibraryApplication
         public CreateNewLibrarianForm()
         {
             InitializeComponent();
+            this.FormClosing += ExitApplication;
         }
 
         private void CreateNewLibrarianForm_Load(object sender, EventArgs e)
@@ -75,6 +76,20 @@ namespace LibraryApplication
                         oh.Create(tableName, textBoxValues);
                     }
                 }
+            }
+        }
+
+        private void returnToMainMenuButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ReturnOrCheckoutForm frm = new ReturnOrCheckoutForm();
+            frm.ShowDialog();
+        }
+        private void ExitApplication(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
             }
         }
     }

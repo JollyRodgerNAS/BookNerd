@@ -86,6 +86,7 @@
             Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(5, 6, 5, 6);
             Name = "ReturnOrCheckoutForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Return or Checkout";
             ResumeLayout(false);
             PerformLayout();
