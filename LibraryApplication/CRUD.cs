@@ -22,7 +22,7 @@ namespace LibraryApplication
             SslMode = MySqlSslMode.Disabled
         };
 
-        public async void Create(string tableName, List<string> textBoxValues)
+        public void Create(string tableName, List<string> textBoxValues)
         {
 
             string connectionString = str.ConnectionString;
@@ -33,7 +33,7 @@ namespace LibraryApplication
             {
                 if (textBoxValues.Count > 0)
                 {
-                    MessageBox.Show(textBoxValues[0]);
+                    MessageBox.Show("Creating librarian...");
                 }
                 else
                 {
@@ -69,7 +69,7 @@ namespace LibraryApplication
             {
                 if (textBoxValues.Count > 0)
                 {
-                    MessageBox.Show(textBoxValues[0]);
+                    MessageBox.Show("Creating book...");
                 }
                 else
                 {
@@ -103,7 +103,7 @@ namespace LibraryApplication
             {
                 if (textBoxValues.Count > 0)
                 {
-                    MessageBox.Show(textBoxValues[0]);
+                    MessageBox.Show("Creating cardholer...");
                 }
                 else
                 {
@@ -142,62 +142,24 @@ namespace LibraryApplication
             string connectionString = str.ConnectionString;
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
-            List<string> searchResults = [];
-            
 
             if (tableName == "librarian")
             {
-                string query = "";
                 connection.Close();
                 return null;
             }
             else if (tableName == "book")
             {
-                string query = "select title from book";
                 connection.Close();
                 return null;
             }
             else if (tableName == "cardholder")
             {
-                /*string query = "select book.title " +
-                               "from checkouts " +
-                               "inner join book on checkouts.bookId = book.id " +
-                               "inner join cardholder on checkouts.cardholderId = cardholder.id " +
-                               "where cardholder.firstName = @firstName and cardholder.lastName = @lastName";
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@firstName", firstName);
-                    command.Parameters.AddWithValue("@lastName", lastName);
-
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.HasRows)
-                        {
-                            MessageBox.Show($"Books checked out to {firstName} {lastName}:");
-                            while (reader.Read())
-                            {
-                                string bookTitle = reader.GetString("title");
-                                searchResults.Add(bookTitle);
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("No books checked out");
-                        }
-                    }
-                }
-                //string formattedResults = string.Join(", ", searchResults);
-                for (int i = 0; i < searchResults.Count; i++)
-                {
-                    return searchResults[i];
-                }*/
                 connection.Close();
                 return null;
             }
             else if (tableName == "checkouts")
             {
-                string query = "select";
                 connection.Close();
                 return null;
             }
@@ -214,7 +176,6 @@ namespace LibraryApplication
             string connectionString = str.ConnectionString;
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
-            string searchResults;
 
             if (tableName == "librarian")
             {
@@ -243,7 +204,7 @@ namespace LibraryApplication
             }
             else if (tableName == "cardholder")
             {
-                string query = "";
+
             }
             else
             {
@@ -284,7 +245,7 @@ namespace LibraryApplication
             }
             else if (tableName == "cardholder")
             {
-                string query = "";
+
             }
             else
             {

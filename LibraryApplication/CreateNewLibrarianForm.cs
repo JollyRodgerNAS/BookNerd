@@ -59,30 +59,38 @@ namespace LibraryApplication
 
             string query = "select userName, password from librarian where " +
                 "userName = @userName and password = @password;";
-
-            using (MySqlCommand command = new MySqlCommand(query, connection))
+            if (firstNameTextBox.Text != "" && lastNameTextBox.Text != "" && emailTextBox.Text != "" &&
+                phoneNumberTextBox.Text != "" && usernameTextBox.Text != "" && passwordTextBox.Text != "")
             {
-                command.Parameters.AddWithValue("@userName", textBoxValues[4]);
-                command.Parameters.AddWithValue("@password", textBoxValues[5]);
-
-                using (MySqlDataReader reader = command.ExecuteReader())
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    if (reader.HasRows)
+                    command.Parameters.AddWithValue("@userName", textBoxValues[4]);
+                    command.Parameters.AddWithValue("@password", textBoxValues[5]);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        MessageBox.Show("Username already exists!");
-                    }
-                    else
-                    {
-                        oh.Create(tableName, textBoxValues);
+                        if (reader.HasRows)
+                        {
+                            MessageBox.Show("Username already exists!");
+                        }
+                        else
+                        {
+                            oh.Create(tableName, textBoxValues);
+                        }
                     }
                 }
             }
+            else
+            {
+                MessageBox.Show("Make sure all boxes are filled with data!");
+            }
+            
         }
 
         private void returnToMainMenuButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            ReturnOrCheckoutForm frm = new ReturnOrCheckoutForm();
+            WelcomeForm frm = new WelcomeForm();
             frm.ShowDialog();
         }
         private void ExitApplication(object sender, FormClosingEventArgs e)

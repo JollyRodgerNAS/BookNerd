@@ -53,22 +53,33 @@ namespace LibraryApplication
 
             string query = "select title, author from book where title = @title and author = @author;";
 
-            using (MySqlCommand command = new MySqlCommand(query, connection))
+            if (bookNameTextBox.Text != "" && authorNameTextBox.Text != "")
             {
-                command.Parameters.AddWithValue("title", textBoxValues[0]);
-                command.Parameters.AddWithValue("author", textBoxValues[1]);
-
-                using (MySqlDataReader reader = command.ExecuteReader())
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    if (reader.HasRows)
+                    command.Parameters.AddWithValue("title", textBoxValues[0]);
+                    command.Parameters.AddWithValue("author", textBoxValues[1]);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        MessageBox.Show("Book already exists!");
-                    }
-                    else
-                    {
-                        oh.Create(tableName, textBoxValues);
+                        if (reader.HasRows)
+                        {
+                            MessageBox.Show("Book already exists!");
+                        }
+                        else
+                        {
+                            oh.Create(tableName, textBoxValues);
+                            bookNameTextBox.ResetText();
+                            authorNameTextBox.ResetText();
+                            bookComboBox.Items.Clear();
+                            AddBookText();
+                        }
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Make sure all boxes have information!");
             }
             connection.Close();
         }
@@ -91,22 +102,33 @@ namespace LibraryApplication
             string query = "select firstName, lastName from cardholder where " +
                 "firstName = @firstName and lastName = @lastName;";
 
-            using (MySqlCommand command = new MySqlCommand(query, connection))
+            if (firstNameTextBox.Text != "" && lastNameTextBox.Text != "")
             {
-                command.Parameters.AddWithValue("@firstName", textBoxValues[0]);
-                command.Parameters.AddWithValue("@lastName", textBoxValues[1]);
-
-                using (MySqlDataReader reader = command.ExecuteReader())
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    if (reader.HasRows)
+                    command.Parameters.AddWithValue("@firstName", textBoxValues[0]);
+                    command.Parameters.AddWithValue("@lastName", textBoxValues[1]);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        MessageBox.Show("Cardholder already exists!");
-                    }
-                    else
-                    {
-                        oh.Create(tableName, textBoxValues);
+                        if (reader.HasRows)
+                        {
+                            MessageBox.Show("Cardholder already exists!");
+                        }
+                        else
+                        {
+                            oh.Create(tableName, textBoxValues);
+                            firstNameTextBox.ResetText();
+                            lastNameTextBox.ResetText();
+                            cardholderComboBox.Items.Clear();
+                            AddCardholderText();
+                        }
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Make sure all boxes have information!");
             }
             connection.Close();
         }
